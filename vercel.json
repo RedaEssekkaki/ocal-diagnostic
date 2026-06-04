@@ -5,7 +5,7 @@
   "outputDirectory": "dist",
   "installCommand": "npm install",
   "functions": {
-    "api/index.py": {
+    "api/*.py": {
       "runtime": "@vercel/python@4.3.0",
       "includeFiles": "nutrition_engine/**"
     }

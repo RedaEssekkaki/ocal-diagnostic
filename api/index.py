@@ -99,11 +99,16 @@ app.add_middleware(
 )
 
 
+@app.get("/")
+@app.get("/api")
+@app.get("/api/index")
 @app.get("/api/health")
 def health() -> dict:
     return {"ok": True}
 
 
+@app.post("/", response_model=ApiResponse)
+@app.post("/api/index", response_model=ApiResponse)
 @app.post("/api/targets", response_model=ApiResponse)
 def targets(payload: ProfileIn) -> dict:
     data = payload.model_dump()
