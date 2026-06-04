@@ -4,9 +4,6 @@
   "buildCommand": "npm install && npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install",
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index" }
-  ],
   "functions": {
     "api/index.py": {
       "runtime": "@vercel/python@4.3.0",
