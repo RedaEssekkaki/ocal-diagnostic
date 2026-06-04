@@ -1,19 +1,11 @@
 import type { Targets } from "../types";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 const COLORS = { Protéines: "#635BFF", Glucides: "#F59E0B", Lipides: "#F43F5E", Fibres: "#10B981" } as const;
 const LABELS = { Protéines: "PROTÉINES", Glucides: "GLUCIDES", Lipides: "LIPIDES" } as const;
 
 function formatNumber(value: number) {
   return new Intl.NumberFormat("fr-FR").format(Math.round(value));
-}
-
-function slicePath(cx: number, cy: number, r: number, a0: number, a1: number) {
-  const x0 = cx + r * Math.cos(a0);
-  const y0 = cy + r * Math.sin(a0);
-  const x1 = cx + r * Math.cos(a1);
-  const y1 = cy + r * Math.sin(a1);
-  const large = a1 - a0 > Math.PI ? 1 : 0;
-  return `M${cx},${cy} L${x0.toFixed(1)},${y0.toFixed(1)} A${r},${r} 0 ${large},1 ${x1.toFixed(1)},${y1.toFixed(1)} Z`;
 }
 
 export function MacroDonut({ t }: { t: Targets }) {
@@ -24,28 +16,42 @@ export function MacroDonut({ t }: { t: Targets }) {
   };
   const totalKcal = parts.Protéines.kcal + parts.Glucides.kcal + parts.Lipides.kcal || 1;
 
-  const cx = 120;
-  const cy = 120;
-  const r = 100;
-  let a = -Math.PI / 2;
-  const segments: { name: keyof typeof parts; d: string; pct: number; g: number }[] = [];
-  (Object.entries(parts) as [keyof typeof parts, typeof parts.Protéines][]).forEach(([name, v]) => {
+  const segments = (Object.entries(parts) as [keyof typeof parts, typeof parts.Protéines][]).map(([name, v]) => {
     const frac = v.kcal / totalKcal;
-    const a1 = a + frac * 2 * Math.PI;
-    segments.push({ name, d: slicePath(cx, cy, r, a, a1), pct: Math.round(100 * frac), g: Math.round(v.g) });
-    a = a1;
+    return { name, kcal: v.kcal, pct: Math.round(100 * frac), g: Math.round(v.g) };
   });
 
   return (
     <div className="grid items-center gap-8 lg:grid-cols-[minmax(220px,300px)_minmax(0,1fr)] lg:gap-10">
       <div className="flex justify-center lg:justify-start">
         <div className="relative h-52 w-52 shrink-0 sm:h-56 sm:w-56">
-          <svg viewBox="0 0 240 240" className="h-full w-full drop-shadow-sm" role="img" aria-label="Donut des macros">
-            {segments.map((s) => (
-              <path key={s.name} d={s.d} fill={COLORS[s.name]} stroke="#fff" strokeLinejoin="round" strokeWidth={4} />
-            ))}
-            <circle cx={cx} cy={cy} r={62} fill="#fff" />
-          </svg>
+          <ResponsiveContainer width="100%" height="100%" className="drop-shadow-sm">
+            <PieChart role="img" aria-label="Donut des macros">
+              <Tooltip
+                cursor={false}
+                formatter={(value, _name, item) => {
+                  const macro = item.payload as (typeof segments)[number];
+                  return [`${formatNumber(Number(value))} kcal`, LABELS[macro.name]];
+                }}
+              />
+              <Pie
+                data={segments}
+                dataKey="kcal"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                innerRadius={62}
+                outerRadius={100}
+                startAngle={90}
+                endAngle={-270}
+                isAnimationActive={false}
+              >
+                {segments.map((s) => (
+                  <Cell key={s.name} fill={COLORS[s.name]} stroke="#fff" strokeWidth={4} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <div className="text-[10px] font-extrabold uppercase text-slate-400">Énergie totale</div>
             <div className="mt-1 text-3xl font-extrabold leading-none text-ocal-green">{formatNumber(t.calories)}</div>
