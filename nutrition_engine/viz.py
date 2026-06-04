@@ -58,7 +58,7 @@ def macro_chart_html(t: Targets, title: str = "Répartition des macros") -> str:
 </style></head>
 <body><div class="card">
   <h1>{title}</h1>
-  <p class="sub">{round(t.calories)} kcal / jour &middot; fiabilité {t.confidence}/100</p>
+  <p class="sub">{round(t.calories)} kcal / jour</p>
   <div class="wrap">
     <svg viewBox="0 0 240 240" width="240" height="240" role="img"
          aria-label="Donut des macros">
