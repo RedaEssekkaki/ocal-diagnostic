@@ -44,7 +44,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <header className="bg-[#275236]">
+      <header className="bg-[#12351E]">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-center">
           <div className="flex items-center justify-center gap-3 sm:gap-6">
             <img
