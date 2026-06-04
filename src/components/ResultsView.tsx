@@ -2,15 +2,15 @@ import type { ApiResponse } from "../types";
 import { MacroDonut } from "./MacroDonut";
 import { MealsTable } from "./MealsTable";
 
-function StatCard({ label, value, unit, hint }: { label: string; value: number | string; unit?: string; hint?: string }) {
+function DailyMetric({ label, value, unit, hint }: { label: string; value: number; unit: string; hint?: string }) {
   return (
-    <div className="card">
-      <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="text-2xl font-semibold mt-1">
-        {value}
-        {unit && <span className="text-base font-normal text-slate-500 ml-1">{unit}</span>}
+    <div className="min-h-[104px] rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</div>
+      <div className="mt-2 flex flex-wrap items-end gap-x-1">
+        <span className="text-2xl font-semibold leading-none text-ocal-ink">{value}</span>
+        <span className="text-sm font-medium text-slate-500">{unit}</span>
       </div>
-      {hint && <div className="text-xs text-slate-400 mt-1">{hint}</div>}
+      {hint && <div className="mt-2 text-xs leading-snug text-slate-500">{hint}</div>}
     </div>
   );
 }
@@ -22,12 +22,32 @@ export function ResultsView({ data }: { data: ApiResponse }) {
     <div className="flex flex-col gap-6">
       <section>
         <h2 className="text-lg font-semibold mb-3 text-ocal-green">Cibles journalières</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          <StatCard label="BMR" value={Math.round(t.bmr)} unit="kcal" hint={t.bmr_method} />
-          <StatCard label="NEAT" value={Math.round(t.neat_kcal)} unit="kcal" />
-          <StatCard label="Sport" value={Math.round(t.sport_kcal)} unit="kcal/j" />
-          <StatCard label="TDEE" value={Math.round(t.tdee)} unit="kcal" />
-          <StatCard label="Cible" value={Math.round(t.calories)} unit="kcal/j" hint={`${t.pace} · ${sign}${t.weekly_change_kg.toFixed(3)} kg/sem`} />
+        <div className="grid gap-3 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+          <div className="relative overflow-hidden rounded-lg border border-[#12351E]/15 bg-white p-5 shadow-sm sm:p-6">
+            <div className="absolute inset-x-0 top-0 h-1.5 bg-ocal-orange" aria-hidden="true" />
+            <div className="flex h-full flex-col justify-between gap-5">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-wide text-ocal-orange">Cible journalière</div>
+                <div className="mt-3 flex flex-wrap items-end gap-x-2 gap-y-1">
+                  <span className="text-4xl font-bold leading-none text-[#12351E] sm:text-5xl">
+                    {Math.round(t.calories)}
+                  </span>
+                  <span className="pb-1 text-lg font-semibold text-slate-500">kcal/j</span>
+                </div>
+              </div>
+              <div className="inline-flex w-fit rounded-full bg-ocal-green-soft px-3 py-1 text-sm font-semibold text-[#12351E]">
+                {t.pace} · {sign}
+                {t.weekly_change_kg.toFixed(3)} kg/sem
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <DailyMetric label="BMR" value={Math.round(t.bmr)} unit="kcal" hint={t.bmr_method} />
+            <DailyMetric label="NEAT" value={Math.round(t.neat_kcal)} unit="kcal" />
+            <DailyMetric label="Sport" value={Math.round(t.sport_kcal)} unit="kcal/j" />
+            <DailyMetric label="TDEE" value={Math.round(t.tdee)} unit="kcal" />
+          </div>
         </div>
         {t.warnings.length > 0 && (
           <div className="mt-4 flex flex-col gap-2">
