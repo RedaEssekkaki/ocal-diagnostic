@@ -1,0 +1,188 @@
+categorie,sport,mode,intensite,code,met
+Force,Musculation,generaliste,,,3.5
+Endurance,Course à pied,generaliste,,,7.5
+Endurance,Cyclisme,generaliste,,,7.0
+Endurance,Natation,generaliste,,,6.0
+Endurance,Marche athlétique,generaliste,,,6.5
+Endurance,Athlétisme,generaliste,,,6.0
+Endurance,Course d'orientation,generaliste,,,9.0
+Collectif,Football,generaliste,,,7.0
+Collectif,Basketball,generaliste,,,7.5
+Collectif,Volleyball,generaliste,,,4.0
+Collectif,Beach-volley,generaliste,,,8.0
+Collectif,Handball,generaliste,,,8.0
+Collectif,Rugby,generaliste,,,7.3
+Collectif,Tennis,generaliste,,,6.8
+Collectif,Padel,generaliste,,,6.8
+Collectif,Badminton,generaliste,,,5.5
+Collectif,Squash,generaliste,,,7.3
+Collectif,Racquetball,generaliste,,,7.0
+Collectif,Hockey sur gazon,generaliste,,,7.8
+Collectif,Hockey sur glace,generaliste,,,8.0
+Collectif,Futsal,generaliste,,,7.8
+Collectif,Netball,generaliste,,,7.0
+Collectif,Lacrosse,generaliste,,,8.0
+Collectif,Cricket,generaliste,,,4.8
+Collectif,Baseball/softball,generaliste,,,5.0
+Collectif,Floorball,generaliste,,,10.5
+Collectif,Ultimate frisbee,generaliste,,,8.0
+Collectif,Water-polo,generaliste,,,10.0
+Combat,Boxe,generaliste,,,7.0
+Combat,Kickboxing,generaliste,,,7.3
+Combat,Karaté,generaliste,,,7.8
+Combat,Taekwondo,generaliste,,,7.8
+Combat,Judo,generaliste,,,8.0
+Combat,Lutte,generaliste,,,8.0
+Combat,MMA,generaliste,,,8.0
+Combat,Kung-fu,generaliste,,,7.8
+Combat,Kendo,generaliste,,,6.5
+Combat,Escrime,generaliste,,,6.0
+Physique,CrossFit/HIIT/circuit training,generaliste,,,7.0
+Physique,Calisthénie,generaliste,,,3.8
+Nautique,Aviron,generaliste,,,5.8
+Nautique,Kayak/Canoë,generaliste,,,5.0
+Nautique,Stand-up paddle,generaliste,,,6.5
+Nautique,Surf,generaliste,,,3.0
+Nautique,Plongée,generaliste,,,7.0
+Nautique,Voile,generaliste,,,3.0
+Nautique,Windsurf/kitesurf,generaliste,,,5.0
+Nautique,Ski nautique/wakeboard,generaliste,,,6.0
+Hiver,Ski alpin,generaliste,,,6.3
+Hiver,Ski de fond,generaliste,,,8.5
+Hiver,Snowboard,generaliste,,,7.5
+Hiver,Patinage sur glace,generaliste,,,7.0
+Hiver,Raquettes,generaliste,,,5.3
+Autre,Yoga,generaliste,,,2.3
+Autre,Pilates,generaliste,,,2.8
+Autre,Danse,generaliste,,,5.0
+Autre,Zumba,generaliste,,,6.5
+Autre,Randonnée,generaliste,,,6.0
+Autre,Escalade,generaliste,,,8.0
+Autre,Roller,generaliste,,,7.5
+Autre,Golf,generaliste,,,4.3
+Autre,Tennis de table,generaliste,,,4.0
+Autre,Équitation,generaliste,,,5.5
+Autre,Gymnastique,generaliste,,,3.8
+Autre,Pétanque,generaliste,,,3.3
+Autre,Skateboard,generaliste,,,5.0
+Autre,Tir à l'arc,generaliste,,,4.3
+Autre,Cheerleading,generaliste,,,6.0
+Force,Musculation,pousse,moderee,02054,3.5
+Force,Musculation,pousse,elevee,02052,5.0
+Force,Musculation,pousse,tres_elevee,02050,6.0
+Force,Haltérophilie,pousse,,02052,5.0
+Endurance,Course à pied,pousse,footing,12030,8.5
+Endurance,Course à pied,pousse,moderee,12050,9.3
+Endurance,Course à pied,pousse,soutenue,12080,11.8
+Endurance,Course à pied,pousse,rapide,12120,14.8
+Endurance,Cyclisme,pousse,loisir,01014,7.0
+Endurance,Cyclisme,pousse,modere,01030,8.0
+Endurance,Cyclisme,pousse,intense,01040,10.0
+Endurance,Cyclisme,pousse,course,01050,12.0
+Endurance,Vélo en salle,pousse,,01270,9.0
+Endurance,Natation,pousse,loisir,18310,6.0
+Endurance,Natation,pousse,moderee,18290,8.0
+Endurance,Natation,pousse,intense,18230,9.8
+Endurance,Marche athlétique,pousse,,17110,6.5
+Endurance,Triathlon,pousse,,12620,13.0
+Endurance,Athlétisme,pousse,lancers,15732,4.0
+Endurance,Athlétisme,pousse,sauts,15733,6.0
+Endurance,Athlétisme,pousse,haies,15734,10.0
+Endurance,Course d'orientation,pousse,,15480,9.0
+Collectif,Football,pousse,loisir,15610,7.0
+Collectif,Football,pousse,competition,15605,9.5
+Collectif,Basketball,pousse,general,15055,7.5
+Collectif,Basketball,pousse,match,15040,8.0
+Collectif,Volleyball,pousse,loisir,15720,3.0
+Collectif,Volleyball,pousse,competition,15711,6.0
+Collectif,Beach-volley,pousse,,15725,8.0
+Collectif,Handball,pousse,,15330,8.0
+Collectif,Rugby,pousse,competition,15560,8.3
+Collectif,Rugby,pousse,touch,15562,6.3
+Collectif,Tennis,pousse,modere,15675,6.8
+Collectif,Tennis,pousse,simple,15690,8.0
+Collectif,Tennis,pousse,double,15680,6.0
+Collectif,Padel,pousse,modere,15675,6.8
+Collectif,Padel,pousse,competition,15690,8.0
+Collectif,Badminton,pousse,loisir,15030,5.5
+Collectif,Badminton,pousse,competition,15025,9.0
+Collectif,Squash,pousse,,15652,7.3
+Collectif,Racquetball,pousse,general,15530,7.0
+Collectif,Racquetball,pousse,competition,15520,10.0
+Collectif,Hockey sur gazon,pousse,,15350,7.8
+Collectif,Hockey sur glace,pousse,general,15360,8.0
+Collectif,Hockey sur glace,pousse,competition,15362,10.0
+Collectif,Futsal,pousse,,15195,7.8
+Collectif,Netball,pousse,,15477,7.0
+Collectif,Lacrosse,pousse,,15460,8.0
+Collectif,Cricket,pousse,,15150,4.8
+Collectif,Baseball/softball,pousse,,15620,5.0
+Collectif,Floorball,pousse,,15205,10.5
+Collectif,Ultimate frisbee,pousse,,15250,8.0
+Collectif,Water-polo,pousse,,18360,10.0
+Combat,Boxe,pousse,sac,15110,5.8
+Combat,Boxe,pousse,sparring,15120,7.8
+Combat,Boxe,pousse,round,15125,9.3
+Combat,Boxe,pousse,ring,15100,12.3
+Combat,Arts martiaux frappés,pousse,novice,15425,5.3
+Combat,Arts martiaux frappés,pousse,modere,15430,10.3
+Combat,Karaté,pousse,novice,15425,5.3
+Combat,Karaté,pousse,modere,15430,10.3
+Combat,Taekwondo,pousse,combat,15432,14.3
+Combat,Judo,pousse,,15433,11.3
+Combat,Kickboxing,pousse,,15457,7.3
+Combat,Lutte,pousse,,15730,6.0
+Combat,Kendo,pousse,modere,15444,6.5
+Combat,Kendo,pousse,intense,15445,9.6
+Combat,Kendo,pousse,tres_intense,15446,11.3
+Combat,Escrime,pousse,,15200,6.0
+Physique,CrossFit/HIIT/circuit training,pousse,modere,02210,7.0
+Physique,CrossFit/HIIT/circuit training,pousse,intense,02214,11.0
+Physique,Calisthénie,pousse,moderee,02022,3.8
+Physique,Calisthénie,pousse,intense,02020,7.5
+Nautique,Aviron,pousse,modere,18050,5.8
+Nautique,Aviron,pousse,competition,18080,12.0
+Nautique,Kayak/Canoë,pousse,loisir,18070,3.5
+Nautique,Kayak/Canoë,pousse,modere,18100,5.0
+Nautique,Kayak/Canoë,pousse,competition,18060,12.5
+Nautique,Stand-up paddle,pousse,,18224,6.5
+Nautique,Surf,pousse,general,18220,3.0
+Nautique,Surf,pousse,competition,18222,5.0
+Nautique,Plongée,pousse,,18200,7.0
+Nautique,Voile,pousse,loisir,18120,3.0
+Nautique,Voile,pousse,competition,18130,4.5
+Nautique,Windsurf/kitesurf,pousse,modere,18380,5.0
+Nautique,Windsurf/kitesurf,pousse,intense,18385,11.0
+Nautique,Ski nautique/wakeboard,pousse,,18150,6.0
+Hiver,Ski alpin,pousse,modere,19160,6.3
+Hiver,Ski alpin,pousse,intense,19170,8.0
+Hiver,Ski de fond,pousse,modere,19090,8.5
+Hiver,Ski de fond,pousse,intense,19100,11.3
+Hiver,Snowboard,pousse,loisir,19201,7.5
+Hiver,Snowboard,pousse,intense,19170,8.0
+Hiver,Patinage sur glace,pousse,general,19030,7.0
+Hiver,Patinage sur glace,pousse,rapide,19040,9.0
+Hiver,Raquettes,pousse,modere,19190,5.3
+Hiver,Raquettes,pousse,intense,19192,10.0
+Autre,Yoga,pousse,general,02150,2.3
+Autre,Yoga,pousse,power,02160,4.0
+Autre,Yoga,pousse,intense,02153,8.0
+Autre,Pilates,pousse,,02105,2.8
+Autre,Danse,pousse,,03010,5.0
+Autre,Zumba,pousse,,02310,6.5
+Autre,Randonnée,pousse,cross,17080,6.0
+Autre,Randonnée,pousse,sac,17010,7.0
+Autre,Escalade,pousse,voie,15533,8.0
+Autre,Escalade,pousse,bloc,15534,8.8
+Autre,Roller,pousse,,15591,7.5
+Autre,Golf,pousse,,15265,4.3
+Autre,Tennis de table,pousse,,15660,4.0
+Autre,Équitation,pousse,marche,15400,3.8
+Autre,Équitation,pousse,trot,15390,5.8
+Autre,Équitation,pousse,galop,15395,7.3
+Autre,Gymnastique,pousse,,15300,3.8
+Autre,Pétanque,pousse,,15465,3.3
+Autre,Skateboard,pousse,loisir,15580,5.0
+Autre,Skateboard,pousse,competition,15582,6.0
+Autre,Tir à l'arc,pousse,,15010,4.3
+Autre,Cheerleading,pousse,,15138,6.0
