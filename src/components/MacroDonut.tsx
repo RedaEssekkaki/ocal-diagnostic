@@ -32,8 +32,8 @@ export function MacroDonut({ t }: { t: Targets }) {
   });
 
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-6">
-      <div className="relative w-60 h-60 shrink-0">
+    <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-10">
+      <div className="relative h-56 w-56 shrink-0 sm:h-60 sm:w-60">
         <svg viewBox="0 0 240 240" className="w-full h-full" role="img" aria-label="Donut des macros">
           {segments.map((s) => (
             <path key={s.name} d={s.d} fill={COLORS[s.name]} />
@@ -45,20 +45,24 @@ export function MacroDonut({ t }: { t: Targets }) {
           <div className="text-xs text-slate-500">kcal / jour</div>
         </div>
       </div>
-      <ul className="flex-1 flex flex-col gap-3 w-full">
+      <ul className="grid w-full max-w-xs gap-3 text-sm sm:max-w-sm">
         {segments.map((s) => (
-          <li key={s.name} className="flex items-center gap-3">
-            <span className="w-3 h-3 rounded-sm" style={{ background: COLORS[s.name] }} />
-            <span className="font-medium w-24">{s.name}</span>
-            <strong className="w-12 text-right">{s.pct}%</strong>
-            <span className="text-slate-500">· {s.g} g</span>
+          <li key={s.name} className="grid grid-cols-[12px_minmax(88px,1fr)_52px_minmax(56px,auto)] items-center gap-3">
+            <span className="h-3 w-3 rounded-sm" style={{ background: COLORS[s.name] }} />
+            <span className="font-medium">{s.name}</span>
+            <strong className="text-right">{s.pct}%</strong>
+            <span className="text-slate-500">
+              <span className="text-slate-300">·</span> {s.g} g
+            </span>
           </li>
         ))}
-        <li className="flex items-center gap-3">
-          <span className="w-3 h-3 rounded-sm" style={{ background: COLORS.Fibres }} />
-          <span className="font-medium w-24">Fibres</span>
-          <span className="w-12" aria-hidden="true" />
-          <span className="text-slate-500">· {t.fiber_g} g</span>
+        <li className="grid grid-cols-[12px_minmax(88px,1fr)_52px_minmax(56px,auto)] items-center gap-3">
+          <span className="h-3 w-3 rounded-sm" style={{ background: COLORS.Fibres }} />
+          <span className="font-medium">Fibres</span>
+          <span aria-hidden="true" />
+          <span className="text-slate-500">
+            <span className="text-slate-300">·</span> {t.fiber_g} g
+          </span>
         </li>
       </ul>
     </div>

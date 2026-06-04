@@ -59,7 +59,7 @@ export function ResultsView({ data }: { data: ApiResponse }) {
       </section>
 
       <section className="card">
-        <h2 className="text-lg font-semibold mb-4 text-ocal-green">Macros</h2>
+        <h2 className="text-center text-lg font-semibold mb-4 text-ocal-green">Macros</h2>
         <MacroDonut t={t} />
       </section>
 
