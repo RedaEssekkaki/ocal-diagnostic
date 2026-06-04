@@ -1,6 +1,6 @@
 import type { Targets } from "../types";
 
-const COLORS = { Protéines: "#534AB7", Glucides: "#BA7517", Lipides: "#0F6E56" };
+const COLORS = { Protéines: "#534AB7", Glucides: "#BA7517", Lipides: "#0F6E56", Fibres: "#2563EB" };
 
 function slicePath(cx: number, cy: number, r: number, a0: number, a1: number) {
   const x0 = cx + r * Math.cos(a0);
@@ -54,9 +54,10 @@ export function MacroDonut({ t }: { t: Targets }) {
             <span className="text-slate-500">· {s.g} g</span>
           </li>
         ))}
-        <li className="flex items-center gap-3 pt-2 border-t border-slate-200">
-          <span className="w-3 h-3" />
+        <li className="flex items-center gap-3">
+          <span className="w-3 h-3 rounded-sm" style={{ background: COLORS.Fibres }} />
           <span className="font-medium w-24">Fibres</span>
+          <span className="w-12" aria-hidden="true" />
           <span className="text-slate-500">· {t.fiber_g} g</span>
         </li>
       </ul>
