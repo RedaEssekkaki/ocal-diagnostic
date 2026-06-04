@@ -44,18 +44,20 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <header className="bg-black">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
-          <img
-            src="/logo.png"
-            alt="Ocal Nutrition"
-            className="h-16 w-auto object-contain sm:h-24"
-          />
-          <img
-            src="/mascot.png"
-            alt="Mascotte Ocal Nutrition"
-            className="h-24 w-auto object-contain sm:h-32 md:h-40"
-          />
+      <header className="bg-[#275236]">
+        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-center">
+          <div className="flex items-center justify-center gap-3 sm:gap-6">
+            <img
+              src="/logo.png"
+              alt="Ocal Nutrition"
+              className="h-16 w-auto object-contain sm:h-24 md:h-28"
+            />
+            <img
+              src="/mascot.png"
+              alt="Mascotte Ocal Nutrition"
+              className="h-24 w-auto object-contain sm:h-32 md:h-40"
+            />
+          </div>
         </div>
       </header>
 
