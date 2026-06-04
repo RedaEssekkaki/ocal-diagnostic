@@ -14,11 +14,13 @@ ocal2/
 ├── nutrition_engine/      # moteur Python pur (BMR, MET, macros…)
 ├── api/
 │   └── index.py           # FastAPI : POST /api/targets, GET /api/health
-├── frontend/              # React SPA (Vite)
+├── src/                   # React (Vite)
+├── index.html             # entrée Vite
+├── package.json           # deps frontend
 ├── requirements.txt       # deps Python (lues par Vercel)
-├── vercel.json            # build + routes /api/* → api/index.py
-├── run_examples.py        # harnais CLI (test de non-régression)
-└── django_integration_example.py  # exemple d'intégration DRF (référence historique)
+├── vercel.json            # routes /api/* → api/index.py
+├── run_examples.py        # harnais CLI
+└── django_integration_example.py  # exemple DRF (référence historique)
 ```
 
 ## Dev local
@@ -36,13 +38,12 @@ python -m uvicorn api.index:app --reload --port 8000
 ### Frontend (port 5173)
 
 ```powershell
-cd frontend
 copy .env.example .env.local
 npm install
 npm run dev
 ```
 
-Le frontend lit `VITE_API_URL` (par défaut vide = même origine). En local, mettre `VITE_API_URL=http://localhost:8000` dans `.env.local`.
+Le frontend lit `VITE_API_URL` (vide en prod = même origine ; `http://localhost:8000` en dev local).
 
 ### Tester le moteur en CLI
 
@@ -77,34 +78,16 @@ Réponse : `{ targets: {…}, meals: {…} }`.
 
 ## Déploiement (Vercel)
 
-### 1. Pousser sur GitHub
+1. Push sur GitHub
+2. Importer le repo dans Vercel — **Root Directory = `./`**
+3. Vercel auto-détecte Vite (via `package.json` à la racine) + Python (via `requirements.txt` + dossier `api/`)
+4. Aucune variable d'env à configurer
 
-```powershell
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/<toi>/<repo>.git
-git push -u origin main
-```
-
-### 2. Importer dans Vercel
-
-1. Sur https://vercel.com → **Add New → Project**, sélectionner le repo.
-2. **Root Directory** : laisser à la racine du repo (Vercel détecte automatiquement [vercel.json](vercel.json)).
-3. Aucune variable d'env à configurer — front et back sur la même origine.
-4. **Deploy**.
-
-Vercel va :
-- Builder le frontend via `cd frontend && npm install && npm run build`
-- Déployer `api/index.py` comme serverless function Python (avec `nutrition_engine/` bundlé via `includeFiles`)
-- Servir le SPA depuis `frontend/dist/`
-- Router `/api/*` vers la fonction Python
-
-### Notes Vercel
-
-- **Cold start** : ~1-2 s à la 1re requête après inactivité (vs 30 s sur Render free).
-- **Timeout** : 10 s par requête sur Hobby plan (notre calcul prend <50 ms, donc OK).
-- **Logs** : disponibles dans le dashboard Vercel sous "Functions".
+Vercel :
+- Build le frontend (`npm install && npm run build`)
+- Déploie `api/index.py` comme serverless function (avec `nutrition_engine/` bundlé via `includeFiles`)
+- Sert le SPA depuis `dist/`
+- Route `/api/*` vers la fonction Python
 
 ## Points scientifiques
 

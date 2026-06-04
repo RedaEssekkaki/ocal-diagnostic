@@ -8,7 +8,13 @@ venv/
 .DS_Store
 .idea/
 .vscode/
-*.html
-!frontend/index.html
+
+# Vite / TS
 node_modules/
 dist/
+*.tsbuildinfo
+vite.config.d.ts
+vite.config.js
+
+# CLI viz output
+macros_*.html
