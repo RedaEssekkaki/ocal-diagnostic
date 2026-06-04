@@ -21,7 +21,7 @@ export function ResultsView({ data }: { data: ApiResponse }) {
   return (
     <div className="flex flex-col gap-6">
       <section>
-        <h2 className="text-lg font-semibold mb-3">Cibles journalières</h2>
+        <h2 className="text-lg font-semibold mb-3 text-ocal-green">Cibles journalières</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           <StatCard label="BMR" value={Math.round(t.bmr)} unit="kcal" hint={t.bmr_method} />
           <StatCard label="NEAT" value={Math.round(t.neat_kcal)} unit="kcal" />
@@ -40,12 +40,12 @@ export function ResultsView({ data }: { data: ApiResponse }) {
       </section>
 
       <section className="card">
-        <h2 className="text-lg font-semibold mb-4">Macros</h2>
+        <h2 className="text-lg font-semibold mb-4 text-ocal-green">Macros</h2>
         <MacroDonut t={t} />
       </section>
 
       <section className="card">
-        <h2 className="text-lg font-semibold mb-4">Répartition des repas</h2>
+        <h2 className="text-lg font-semibold mb-4 text-ocal-green">Répartition des repas</h2>
         <MealsTable meals={meals} />
       </section>
     </div>

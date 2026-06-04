@@ -44,10 +44,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-5">
-          <h1 className="text-2xl font-bold">Nutrition sportive</h1>
-          <p className="text-sm text-slate-500">Cibles caloriques et macros selon ton profil et tes séances.</p>
+      <header className="bg-ocal-green-deep">
+        <div className="max-w-5xl mx-auto px-4 py-5 flex items-center justify-center">
+          <img
+            src="/logo.png"
+            alt="Ocal Nutrition"
+            className="h-24 w-auto object-contain"
+          />
         </div>
       </header>
 
@@ -65,8 +68,8 @@ export default function App() {
         )}
       </main>
 
-      <footer className="text-center text-xs text-slate-400 py-8">
-        Moteur Mifflin / Cunningham / Ten-Haaf · MET · garde-fous RED-S
+      <footer className="text-center text-xs text-ocal-muted py-6">
+        Ocal Nutrition · calcul personnalisé selon ton profil
       </footer>
     </div>
   );

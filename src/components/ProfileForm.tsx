@@ -22,7 +22,7 @@ export function ProfileForm({ initial, onSubmit, loading }: Props) {
   return (
     <form onSubmit={handle} className="flex flex-col gap-6">
       <section className="card">
-        <h2 className="text-lg font-semibold mb-4">Profil</h2>
+        <h2 className="text-lg font-semibold mb-4 text-ocal-green">Profil</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="field">
             <label>Sexe</label>
@@ -78,7 +78,7 @@ export function ProfileForm({ initial, onSubmit, loading }: Props) {
       </section>
 
       <section className="card">
-        <h2 className="text-lg font-semibold mb-4">Activité quotidienne</h2>
+        <h2 className="text-lg font-semibold mb-4 text-ocal-green">Activité quotidienne</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="field">
             <label>Niveau d'activité</label>
@@ -104,12 +104,12 @@ export function ProfileForm({ initial, onSubmit, loading }: Props) {
       </section>
 
       <section className="card">
-        <h2 className="text-lg font-semibold mb-4">Séances</h2>
+        <h2 className="text-lg font-semibold mb-4 text-ocal-green">Séances</h2>
         <SessionsField sessions={p.sessions} onChange={(s) => set("sessions", s)} />
       </section>
 
       <section className="card">
-        <h2 className="text-lg font-semibold mb-4">Préférences repas</h2>
+        <h2 className="text-lg font-semibold mb-4 text-ocal-green">Préférences repas</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="field">
             <label>Petit déjeuner</label>
