@@ -10,13 +10,15 @@ interface Props {
 
 export function ProfileForm({ initial, onSubmit, loading }: Props) {
   const [p, setP] = useState<ProfileIn>(initial);
+  const [weightText, setWeightText] = useState(() => String(initial.weight_kg));
 
   const set = <K extends keyof ProfileIn>(key: K, v: ProfileIn[K]) =>
     setP((prev) => ({ ...prev, [key]: v }));
 
   const handle = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(p);
+    if (weightText.trim() === "") return;
+    onSubmit({ ...p, weight_kg: Number(weightText) });
   };
 
   return (
@@ -37,7 +39,18 @@ export function ProfileForm({ initial, onSubmit, loading }: Props) {
           </div>
           <div className="field">
             <label>Poids (kg)</label>
-            <input type="number" step="0.1" min={30} max={300} value={p.weight_kg} onChange={(e) => set("weight_kg", Number(e.target.value))} required />
+            <input
+              type="number"
+              step="0.1"
+              min={30}
+              max={300}
+              value={weightText}
+              onChange={(e) => {
+                setWeightText(e.target.value);
+                if (e.target.value !== "") set("weight_kg", Number(e.target.value));
+              }}
+              required
+            />
           </div>
           <div className="field">
             <label>Taille (cm)</label>
