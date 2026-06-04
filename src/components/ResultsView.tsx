@@ -15,13 +15,17 @@ function DailyMetric({ label, value, unit, hint }: { label: string; value: numbe
   );
 }
 
+function SectionTitle({ children }: { children: string }) {
+  return <h2 className="mb-4 text-2xl font-extrabold uppercase leading-tight text-ocal-green sm:text-3xl">{children}</h2>;
+}
+
 export function ResultsView({ data }: { data: ApiResponse }) {
   const { targets: t, meals } = data;
   const sign = t.weekly_change_kg > 0 ? "+" : "";
   return (
     <div className="flex flex-col gap-6">
       <section>
-        <h2 className="text-lg font-semibold mb-3 text-ocal-green">Cibles journalières</h2>
+        <SectionTitle>Cibles journalières</SectionTitle>
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
           <div className="relative overflow-hidden rounded-lg border border-[#12351E]/15 bg-white p-5 shadow-sm sm:p-6">
             <div className="absolute inset-x-0 top-0 h-1.5 bg-ocal-orange" aria-hidden="true" />
@@ -58,14 +62,18 @@ export function ResultsView({ data }: { data: ApiResponse }) {
         )}
       </section>
 
-      <section className="card">
-        <h2 className="text-center text-lg font-semibold mb-4 text-ocal-green">Macros</h2>
-        <MacroDonut t={t} />
+      <section>
+        <SectionTitle>Macros</SectionTitle>
+        <div className="card px-6 py-7 sm:p-8">
+          <MacroDonut t={t} />
+        </div>
       </section>
 
-      <section className="card">
-        <h2 className="text-lg font-semibold mb-4 text-ocal-green">Répartition des repas</h2>
-        <MealsTable meals={meals} />
+      <section>
+        <SectionTitle>Répartition des repas</SectionTitle>
+        <div className="card">
+          <MealsTable meals={meals} />
+        </div>
       </section>
     </div>
   );

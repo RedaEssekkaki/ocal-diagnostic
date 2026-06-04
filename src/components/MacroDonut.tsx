@@ -1,6 +1,11 @@
 import type { Targets } from "../types";
 
-const COLORS = { Protéines: "#534AB7", Glucides: "#BA7517", Lipides: "#0F6E56", Fibres: "#2563EB" };
+const COLORS = { Protéines: "#635BFF", Glucides: "#F59E0B", Lipides: "#F43F5E", Fibres: "#10B981" } as const;
+const LABELS = { Protéines: "PROTÉINES", Glucides: "GLUCIDES", Lipides: "LIPIDES" } as const;
+
+function formatNumber(value: number) {
+  return new Intl.NumberFormat("fr-FR").format(Math.round(value));
+}
 
 function slicePath(cx: number, cy: number, r: number, a0: number, a1: number) {
   const x0 = cx + r * Math.cos(a0);
@@ -32,39 +37,56 @@ export function MacroDonut({ t }: { t: Targets }) {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-10">
-      <div className="relative h-56 w-56 shrink-0 sm:h-60 sm:w-60">
-        <svg viewBox="0 0 240 240" className="w-full h-full" role="img" aria-label="Donut des macros">
-          {segments.map((s) => (
-            <path key={s.name} d={s.d} fill={COLORS[s.name]} />
-          ))}
-          <circle cx={cx} cy={cy} r={62} fill="#fff" />
-        </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className="text-3xl font-semibold">{Math.round(t.calories)}</div>
-          <div className="text-xs text-slate-500">kcal / jour</div>
+    <div className="grid items-center gap-8 lg:grid-cols-[minmax(220px,300px)_minmax(0,1fr)] lg:gap-10">
+      <div className="flex justify-center lg:justify-start">
+        <div className="relative h-52 w-52 shrink-0 sm:h-56 sm:w-56">
+          <svg viewBox="0 0 240 240" className="h-full w-full drop-shadow-sm" role="img" aria-label="Donut des macros">
+            {segments.map((s) => (
+              <path key={s.name} d={s.d} fill={COLORS[s.name]} stroke="#fff" strokeLinejoin="round" strokeWidth={4} />
+            ))}
+            <circle cx={cx} cy={cy} r={62} fill="#fff" />
+          </svg>
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="text-[10px] font-extrabold uppercase text-slate-400">Énergie totale</div>
+            <div className="mt-1 text-3xl font-extrabold leading-none text-ocal-green">{formatNumber(t.calories)}</div>
+            <div className="mt-1 text-xs font-semibold uppercase text-slate-400">kcal</div>
+          </div>
         </div>
       </div>
-      <ul className="grid w-full max-w-xs gap-3 text-sm sm:max-w-sm">
-        {segments.map((s) => (
-          <li key={s.name} className="grid grid-cols-[12px_minmax(88px,1fr)_52px_minmax(56px,auto)] items-center gap-3">
-            <span className="h-3 w-3 rounded-sm" style={{ background: COLORS[s.name] }} />
-            <span className="font-medium">{s.name}</span>
-            <strong className="text-right">{s.pct}%</strong>
-            <span className="text-slate-500">
-              <span className="text-slate-300">·</span> {s.g} g
-            </span>
-          </li>
-        ))}
-        <li className="grid grid-cols-[12px_minmax(88px,1fr)_52px_minmax(56px,auto)] items-center gap-3">
-          <span className="h-3 w-3 rounded-sm" style={{ background: COLORS.Fibres }} />
-          <span className="font-medium">Fibres</span>
-          <span aria-hidden="true" />
-          <span className="text-slate-500">
-            <span className="text-slate-300">·</span> {t.fiber_g} g
-          </span>
-        </li>
-      </ul>
+
+      <div className="grid w-full gap-3">
+        <ul className="grid gap-3">
+          {segments.map((s) => (
+            <li
+              key={s.name}
+              className="flex min-h-[48px] items-center justify-between gap-4 rounded-lg border bg-white px-4 py-3"
+              style={{
+                borderColor: `${COLORS[s.name]}33`,
+                boxShadow: `0 14px 32px -24px ${COLORS[s.name]}`,
+              }}
+            >
+              <div className="flex min-w-0 items-center gap-3">
+                <span
+                  className="h-2.5 w-2.5 shrink-0 rounded-full"
+                  style={{ background: COLORS[s.name], boxShadow: `0 0 0 4px ${COLORS[s.name]}1F` }}
+                />
+                <span className="truncate text-[11px] font-extrabold uppercase text-ocal-green">{LABELS[s.name]}</span>
+              </div>
+              <div className="flex shrink-0 items-baseline gap-2 text-sm font-extrabold" style={{ color: COLORS[s.name] }}>
+                <strong className="font-extrabold">{s.pct}%</strong>
+                <span className="text-slate-300">·</span>
+                <span>{s.g} g</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex items-center gap-2 px-2 pt-3 text-[11px] font-extrabold uppercase text-slate-500">
+          <span>Fibres</span>
+          <span className="text-slate-300">·</span>
+          <span style={{ color: COLORS.Fibres }}>{Math.round(t.fiber_g)} g</span>
+        </div>
+      </div>
     </div>
   );
 }
