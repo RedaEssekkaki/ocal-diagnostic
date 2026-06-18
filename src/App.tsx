@@ -3,6 +3,9 @@ import type { ProfileIn, ApiResponse } from "./types";
 import { postTargets } from "./api";
 import { ProfileForm } from "./components/ProfileForm";
 import { ResultsView } from "./components/ResultsView";
+import { Footer } from "./components/Footer";
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
 
 const DEFAULT_PROFILE: ProfileIn = {
   sex: "M",
@@ -34,7 +37,7 @@ export default function App() {
     try {
       const r = await postTargets(p);
       setResult(r);
-      setTimeout(() => document.getElementById("results")?.scrollIntoView({ behavior: "smooth" }), 50);
+      setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 50);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -43,41 +46,43 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen">
-      <header className="bg-[#12351E]">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-center">
-          <div className="flex items-center justify-center gap-3 sm:gap-6">
-            <img
-              src="/logo.png"
-              alt="Ocal Nutrition"
-              className="h-16 w-auto object-contain sm:h-24 md:h-28"
-            />
-            <img
-              src="/mascot.png"
-              alt="Mascotte Ocal Nutrition"
-              className="h-24 w-auto object-contain sm:h-32 md:h-40"
-            />
-          </div>
+    <div className="min-h-screen flex flex-col">
+      <header className="bg-dark-green">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-center">
+          <img
+            src="/logo.png"
+            alt="Ocal Nutrition"
+            className="h-14 w-auto object-contain sm:h-16"
+          />
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 py-8">
-        <ProfileForm initial={DEFAULT_PROFILE} onSubmit={handleSubmit} loading={loading} />
-
-        {error && (
-          <div className="mt-6 chip bg-red-100 text-red-900">Erreur : {error}</div>
-        )}
-
-        {result && (
-          <div id="results" className="mt-10 pt-8 border-t border-slate-200">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-8">
+        {result ? (
+          <div>
+            <div className="mb-6">
+              <Button
+                variant="text"
+                onClick={() => setResult(null)}
+                leftIcon={<Icon name="arrow_back" size={20} />}
+              >
+                Modifier mes informations
+              </Button>
+            </div>
             <ResultsView data={result} />
           </div>
+        ) : (
+          <>
+            <ProfileForm initial={DEFAULT_PROFILE} onSubmit={handleSubmit} loading={loading} />
+
+            {error && (
+              <div className="mt-6 chip bg-error-pale text-error-strong">Erreur : {error}</div>
+            )}
+          </>
         )}
       </main>
 
-      <footer className="text-center text-xs text-ocal-muted py-6">
-        Ocal Nutrition · calcul personnalisé selon ton profil
-      </footer>
+      <Footer />
     </div>
   );
 }

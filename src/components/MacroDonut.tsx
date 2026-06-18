@@ -1,7 +1,7 @@
 import type { Targets } from "../types";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-const COLORS = { Protéines: "#635BFF", Glucides: "#F59E0B", Lipides: "#F43F5E", Fibres: "#10B981" } as const;
+const COLORS = { Protéines: "#534AB7", Glucides: "#BA7517", Lipides: "#0F6E56", Fibres: "#6F931D" } as const;
 const LABELS = { Protéines: "PROTÉINES", Glucides: "GLUCIDES", Lipides: "LIPIDES" } as const;
 
 function formatNumber(value: number) {
@@ -53,9 +53,9 @@ export function MacroDonut({ t }: { t: Targets }) {
             </PieChart>
           </ResponsiveContainer>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-[10px] font-extrabold uppercase text-slate-400">Énergie totale</div>
-            <div className="mt-1 text-3xl font-extrabold leading-none text-ocal-green">{formatNumber(t.calories)}</div>
-            <div className="mt-1 text-xs font-semibold uppercase text-slate-400">kcal</div>
+            <div className="text-[10px] font-extrabold uppercase text-muted">Énergie totale</div>
+            <div className="mt-1 font-title text-3xl leading-none text-dark-green">{formatNumber(t.calories)}</div>
+            <div className="mt-1 text-xs font-semibold uppercase text-muted">kcal</div>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@ export function MacroDonut({ t }: { t: Targets }) {
           {segments.map((s) => (
             <li
               key={s.name}
-              className="flex min-h-[48px] items-center justify-between gap-4 rounded-lg border bg-white px-4 py-3"
+              className="flex min-h-[48px] items-center justify-between gap-4 rounded-md border bg-white px-4 py-3"
               style={{
                 borderColor: `${COLORS[s.name]}33`,
                 boxShadow: `0 14px 32px -24px ${COLORS[s.name]}`,
@@ -76,18 +76,18 @@ export function MacroDonut({ t }: { t: Targets }) {
                   className="h-2.5 w-2.5 shrink-0 rounded-full"
                   style={{ background: COLORS[s.name], boxShadow: `0 0 0 4px ${COLORS[s.name]}1F` }}
                 />
-                <span className="truncate text-[11px] font-extrabold uppercase text-ocal-green">{LABELS[s.name]}</span>
+                <span className="truncate text-[11px] font-extrabold uppercase text-dark-green">{LABELS[s.name]}</span>
               </div>
               <div className="flex shrink-0 items-baseline gap-2 text-sm font-extrabold" style={{ color: COLORS[s.name] }}>
                 <strong className="font-extrabold">{s.pct}%</strong>
-                <span className="text-slate-300">·</span>
+                <span className="text-line">·</span>
                 <span>{s.g} g</span>
               </div>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-2 px-2 pt-3 text-[11px] font-extrabold uppercase text-slate-500">
+        <div className="flex items-center gap-2 px-2 pt-3 text-[11px] font-extrabold uppercase text-muted">
           <span>Fibres</span>
           <span className="text-slate-300">·</span>
           <span style={{ color: COLORS.Fibres }}>{Math.round(t.fiber_g)} g</span>
