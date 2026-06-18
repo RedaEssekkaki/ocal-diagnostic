@@ -1,26 +1,166 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/*
+ * Tokens O'cal — Material Design 3 kit
+ * (primitives + sémantiques, alignés sur le projet de référence ocal-nutrition).
+ */
+@theme {
+  /* ===== Primitives — Primary (orange) ===== */
+  --color-primary-100: #ffede3;
+  --color-primary-200: #fbc293;
+  --color-primary-300: #ef7b1d; /* default */
+  --color-primary-400: #c85e09;
+
+  /* ===== Primitives — Secondary (green) ===== */
+  --color-secondary-100: #78a588;
+  --color-secondary-200: #275236;
+  --color-secondary-300: #12351e; /* default */
+  --color-secondary-400: #092111;
+
+  /* ===== Primitives — Black / White brand (warm neutrals) ===== */
+  --color-black-brand-50: #a2aea6;
+  --color-black-brand-200: #828f87;
+  --color-black-brand-300: #505c54;
+  --color-black-brand-400: #1b2920; /* default ink */
+  --color-white-brand-100: #fdf8f6;
+  --color-white-brand-200: #e7e0dd;
+  --color-white-brand-300: #c6c0bd;
+  --color-white-brand-400: #b0a5a1;
+
+  /* ===== Primitives — Neutral (greys) ===== */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #efefef;
+  --color-neutral-300: #dcdcdc;
+  --color-neutral-400: #989898;
+  --color-neutral-500: #7c7c7c;
+  --color-neutral-600: #656565;
+  --color-neutral-700: #525252;
+  --color-neutral-800: #464646;
+  --color-neutral-900: #3d3d3d;
+  --color-neutral-950: #292929;
+
+  /* ===== Primitives — Functional: informative (blue) ===== */
+  --color-info-50: #f1f8fe;
+  --color-info-100: #e3eefb;
+  --color-info-200: #c0def7;
+  --color-info-600: #146db5; /* default */
+  --color-info-700: #115793;
+
+  /* ===== Primitives — Functional: success (lime) ===== */
+  --color-success-100: #eef7d0;
+  --color-success-200: #deefa7;
+  --color-success-600: #6f931d; /* default */
+  --color-success-700: #55701b;
+
+  /* ===== Primitives — Functional: warning (amber) ===== */
+  --color-warning-100: #fbecd9;
+  --color-warning-200: #f6d6b2;
+  --color-warning-600: #d46022; /* default */
+  --color-warning-700: #b04a1e;
+
+  /* ===== Primitives — Functional: error (red) ===== */
+  --color-error-100: #fae5da;
+  --color-error-200: #f4c8b4;
+  --color-error-600: #d03c26; /* default */
+  --color-error-700: #ad2c21;
+
+  /* ===== Semantic aliases ===== */
+  /* Brand */
+  --color-primary: #ef7b1d;
+  --color-primary-hover: #d96f10;
+  --color-primary-text: #fdf8f6;
+  --color-primary-strong: #c85e09;
+  --color-primary-soft: #fbc293;
+  --color-primary-pale: #ffede3;
+
+  --color-dark-green: #12351e;
+  --color-green-deep: #092111;
+  --color-green-mid: #275236;
+  --color-green-soft: #78a588;
+  --color-green-pale: #dce5e0;
+
+  /* Surfaces & neutrals */
+  --color-surface: #fdf8f6; /* background_default */
+  --color-surface-variant: #e7e0dd;
+  --color-tonal-bg: #fef8f3;
+  --color-label-default: #1b2920;
+  --color-muted: #505c54;
+  --color-line: #e7e0dd; /* border_color_default */
+  --color-disabled-bg: #dad6d2;
+  --color-disabled-text: #8d928e;
+
+  /* Functional (semantic) */
+  --color-info: #146db5;
+  --color-info-strong: #115793;
+  --color-info-soft: #c0def7;
+  --color-info-pale: #e3eefb;
+
+  --color-success: #6f931d;
+  --color-success-strong: #55701b;
+  --color-success-soft: #deefa7;
+  --color-success-pale: #eef7d0;
+
+  --color-warning: #d46022;
+  --color-warning-strong: #b04a1e;
+  --color-warning-soft: #f6d6b2;
+  --color-warning-pale: #fbecd9;
+
+  --color-error: #d03c26;
+  --color-error-strong: #ad2c21;
+  --color-error-soft: #f4c8b4;
+  --color-error-pale: #fae5da;
+
+  /* Macros (donut / tableau repas) */
+  --color-protein: #534ab7;
+  --color-carb: #ba7517;
+  --color-fat: #0f6e56;
+
+  /* ===== Radius (xs/s/m/l/xl/full) ===== */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+  --radius-button: 9999px;
+
+  /* ===== Typography ===== */
+  --font-title: "Bakbak One", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+
+  /* ===== Motion (Material 3) ===== */
+  --ease-m3: cubic-bezier(0.2, 0, 0, 1);
+  --duration-m3-short: 120ms;
+  --duration-m3-medium: 180ms;
+
+  /* ===== Elevation ===== */
+  --shadow-e1: 0 1px 2px rgba(18, 53, 30, 0.08);
+  --shadow-e2: 0 2px 6px rgba(18, 53, 30, 0.1);
+  --shadow-e3: 0 6px 12px rgba(18, 53, 30, 0.1);
+  --shadow-e4: 0 10px 20px rgba(18, 53, 30, 0.12);
+  --shadow-e5: 0 16px 32px rgba(18, 53, 30, 0.14);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    background-color: var(--color-surface);
+    color: var(--color-label-default);
+    -webkit-font-smoothing: antialiased;
+  }
+}
 
 @layer components {
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-slate-200 p-5;
-  }
-  .field {
-    @apply flex flex-col gap-1 text-sm;
-  }
-  .field > label {
-    @apply font-medium text-slate-700;
-  }
-  .field > input,
-  .field > select {
-    @apply border border-slate-300 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-slate-400;
-  }
-  .btn-primary {
-    @apply bg-ocal-orange text-white rounded-lg px-5 py-2.5 font-semibold hover:brightness-95 disabled:opacity-50 disabled:cursor-not-allowed transition;
-  }
-  .btn-ghost {
-    @apply text-slate-700 hover:bg-slate-100 rounded-lg px-3 py-1.5 text-sm transition;
+    @apply bg-white rounded-md shadow-[var(--shadow-e2)] border border-line p-5;
   }
   .chip {
     @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
