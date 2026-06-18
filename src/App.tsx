@@ -1,30 +1,11 @@
 import { useState } from "react";
 import type { ProfileIn, ApiResponse } from "./types";
 import { postTargets } from "./api";
-import { ProfileForm } from "./components/ProfileForm";
+import { ProfileForm, EMPTY_PROFILE } from "./components/ProfileForm";
 import { ResultsView } from "./components/ResultsView";
 import { Footer } from "./components/Footer";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-
-const DEFAULT_PROFILE: ProfileIn = {
-  sex: "M",
-  birthday: "1999-01-01",
-  weight_kg: 75,
-  height_cm: 177,
-  objective: "prise_muscle",
-  sessions: [
-    { sport: "Musculation", minutes: 75, per_week: 4, intensity: "elevee" },
-  ],
-  activity_level: "leger",
-  steps: 9000,
-  pace: "doux",
-  bodyfat_pct: 12,
-  diet: "omnivore",
-  is_athlete: false,
-  breakfast: "complet",
-  main_meal: "equilibre",
-};
 
 export default function App() {
   const [result, setResult] = useState<ApiResponse | null>(null);
@@ -73,7 +54,7 @@ export default function App() {
           </div>
         ) : (
           <>
-            <ProfileForm initial={DEFAULT_PROFILE} onSubmit={handleSubmit} loading={loading} />
+            <ProfileForm initial={EMPTY_PROFILE} onSubmit={handleSubmit} loading={loading} />
 
             {error && (
               <div className="mt-6 chip bg-error-pale text-error-strong">Erreur : {error}</div>

@@ -9,8 +9,30 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Chip } from "@/components/ui/chip";
 import { Icon } from "@/components/ui/icon";
 
+export type ProfileDraft = Omit<ProfileIn, "sex" | "objective"> & {
+  sex: ProfileIn["sex"] | "";
+  objective: ProfileIn["objective"] | "";
+};
+
+export const EMPTY_PROFILE: ProfileDraft = {
+  sex: "",
+  birthday: "",
+  weight_kg: 0,
+  height_cm: 0,
+  objective: "",
+  sessions: [],
+  activity_level: "sedentaire",
+  steps: null,
+  pace: null,
+  bodyfat_pct: null,
+  diet: "omnivore",
+  is_athlete: false,
+  breakfast: "complet",
+  main_meal: "equilibre",
+};
+
 interface Props {
-  initial: ProfileIn;
+  initial: ProfileDraft;
   onSubmit: (p: ProfileIn) => void;
   loading: boolean;
 }
@@ -53,17 +75,26 @@ const MAIN_MEALS = [
 ];
 
 export function ProfileForm({ initial, onSubmit, loading }: Props) {
-  const [p, setP] = useState<ProfileIn>(initial);
-  const [weightText, setWeightText] = useState(() => String(initial.weight_kg));
+  const [p, setP] = useState<ProfileDraft>(initial);
+  const [weightText, setWeightText] = useState(() =>
+    initial.weight_kg ? String(initial.weight_kg) : "",
+  );
+  const [heightText, setHeightText] = useState(() =>
+    initial.height_cm ? String(initial.height_cm) : "",
+  );
   const [step, setStep] = useState(0);
 
-  const set = <K extends keyof ProfileIn>(key: K, v: ProfileIn[K]) =>
+  const set = <K extends keyof ProfileDraft>(key: K, v: ProfileDraft[K]) =>
     setP((prev) => ({ ...prev, [key]: v }));
 
   const isLast = step === STEPS.length - 1;
 
   const profileValid =
-    p.birthday.trim() !== "" && weightText.trim() !== "" && p.height_cm > 0;
+    p.sex !== "" &&
+    p.objective !== "" &&
+    p.birthday.trim() !== "" &&
+    weightText.trim() !== "" &&
+    heightText.trim() !== "";
 
   const next = () => {
     if (step === 0 && !profileValid) return;
@@ -72,8 +103,14 @@ export function ProfileForm({ initial, onSubmit, loading }: Props) {
   const back = () => setStep((s) => Math.max(s - 1, 0));
 
   const submit = () => {
-    if (weightText.trim() === "") return;
-    onSubmit({ ...p, weight_kg: Number(weightText) });
+    if (!profileValid) return;
+    onSubmit({
+      ...p,
+      sex: p.sex as ProfileIn["sex"],
+      objective: p.objective as ProfileIn["objective"],
+      weight_kg: Number(weightText),
+      height_cm: Number(heightText),
+    });
   };
 
   return (
@@ -141,14 +178,18 @@ export function ProfileForm({ initial, onSubmit, loading }: Props) {
                 label="Taille (cm)"
                 min={120}
                 max={230}
-                value={p.height_cm}
-                onChange={(e) => set("height_cm", Number(e.target.value))}
+                value={heightText}
+                onChange={(e) => {
+                  setHeightText(e.target.value);
+                  if (e.target.value !== "") set("height_cm", Number(e.target.value));
+                }}
                 required
               />
               <Select
                 label="Objectif"
+                placeholder="Sélectionner"
                 value={p.objective}
-                onValueChange={(v) => set("objective", v as ProfileIn["objective"])}
+                onValueChange={(v) => set("objective", v as ProfileDraft["objective"])}
                 options={OBJECTIVES}
               />
               <Select
