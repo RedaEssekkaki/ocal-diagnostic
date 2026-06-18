@@ -34,8 +34,8 @@ export function ProfileForm({ initial, onSubmit, loading }: Props) {
             </select>
           </div>
           <div className="field">
-            <label>Âge</label>
-            <input type="number" min={14} max={100} value={p.age} onChange={(e) => set("age", Number(e.target.value))} required />
+            <label>Date de naissance</label>
+            <input type="date" value={p.birthday} onChange={(e) => set("birthday", e.target.value)} required />
           </div>
           <div className="field">
             <label>Poids (kg)</label>

@@ -15,7 +15,7 @@ export interface SessionIn {
 
 export interface ProfileIn {
   sex: Sex;
-  age: number;
+  birthday: string;
   weight_kg: number;
   height_cm: number;
   objective: Objective;
@@ -45,6 +45,7 @@ export interface Targets {
   fiber_g: number;
   confidence: number;
   warnings: string[];
+  infos: string[];
 }
 
 export interface Meal {

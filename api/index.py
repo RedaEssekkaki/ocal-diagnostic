@@ -5,6 +5,7 @@ Endpoint unique : POST /api/targets.
 from __future__ import annotations
 from typing import Literal, Optional
 from dataclasses import asdict
+from datetime import date
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -36,7 +37,7 @@ class SessionIn(BaseModel):
 
 class ProfileIn(BaseModel):
     sex: Sex
-    age: int = Field(..., ge=14, le=100)
+    birthday: str = Field(..., description="Date de naissance ISO (YYYY-MM-DD)")
     weight_kg: float = Field(..., ge=30, le=300)
     height_cm: float = Field(..., ge=120, le=230)
     objective: Objective
@@ -66,6 +67,7 @@ class TargetsOut(BaseModel):
     fiber_g: float
     confidence: int
     warnings: list[str]
+    infos: list[str]
 
 
 class MealOut(BaseModel):
@@ -115,7 +117,10 @@ def targets(payload: ProfileIn) -> dict:
     breakfast = data.pop("breakfast")
     main_meal = data.pop("main_meal")
     sessions = [Session(**s) for s in data.pop("sessions")]
-    profile = Profile(sessions=sessions, **data)
+    bday = date.fromisoformat(data.pop("birthday"))
+    today = date.today()
+    age = today.year - bday.year - ((today.month, today.day) < (bday.month, bday.day))
+    profile = Profile(sessions=sessions, age=age, **data)
 
     t = compute_targets(profile)
     meals = split_into_meals(t, breakfast=breakfast, main_meal=main_meal)

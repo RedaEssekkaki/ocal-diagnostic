@@ -53,6 +53,13 @@ export function ResultsView({ data }: { data: ApiResponse }) {
             <DailyMetric label="TDEE" value={Math.round(t.tdee)} unit="kcal" />
           </div>
         </div>
+        {t.infos && t.infos.length > 0 && (
+          <div className="mt-4 flex flex-col gap-2">
+            {t.infos.map((info, i) => (
+              <div key={i} className="chip bg-blue-50 text-blue-800 self-start">ℹ {info}</div>
+            ))}
+          </div>
+        )}
         {t.warnings.length > 0 && (
           <div className="mt-4 flex flex-col gap-2">
             {t.warnings.map((w, i) => (

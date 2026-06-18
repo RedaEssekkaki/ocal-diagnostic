@@ -39,7 +39,7 @@ KCAL_PER_KG = 7700.0
 PACE_RATES = {
     "perte":         {"doux": 0.005, "modere": 0.0075, "rapide": 0.010},
     "seche":         {"doux": 0.005, "modere": 0.0075, "rapide": 0.010},
-    "prise_muscle":  {"doux": 0.0025, "modere": 0.004},
+    "prise_muscle":  {"doux": 0.0025, "modere": 0.004, "rapide": 0.005},
     "recomposition": {"doux": 0.0035, "modere": 0.005},
     "maintien":      {"doux": 0.0, "modere": 0.0, "rapide": 0.0},
 }
@@ -141,6 +141,7 @@ class Targets:
     fiber_g: float
     confidence: int
     warnings: list[str] = field(default_factory=list)
+    infos: list[str] = field(default_factory=list)
 
 
 # ===========================================================================
@@ -293,8 +294,8 @@ def fiber_g(calories: float) -> int:
 # ===========================================================================
 # 8. ÉTAGE 5 — GARDE-FOUS + CONFIANCE
 # ===========================================================================
-def guardrails(p: Profile, calories: float, sport_kcal: float, weekly_change: float) -> list[str]:
-    w = []
+def guardrails(p: Profile, calories: float, sport_kcal: float, weekly_change: float, pace: str) -> tuple[list[str], list[str]]:
+    w, infos = [], []
     # 1) RED-S : énergie disponible (si masse maigre connue)
     if p.bodyfat_pct is not None:
         ffm = p.weight_kg * (1 - p.bodyfat_pct / 100.0)
@@ -308,7 +309,21 @@ def guardrails(p: Profile, calories: float, sport_kcal: float, weekly_change: fl
     # 3) Rythme plafonné (information)
     if abs(weekly_change) >= LOSS_CAP * p.weight_kg - 1e-6 and OBJECTIVE_SIGN[p.objective] < 0:
         w.append("Rythme plafonné à 1 %/semaine (sécurité, préservation du muscle).")
-    return w
+    # 4) Conseils spécifiques prise de muscle
+    if p.objective == "prise_muscle":
+        infos.append(
+            "Prise lente et contrôlée pour limiter le gras. Une légère prise de gras reste normale. "
+            "Pèse-toi chaque semaine : si tu montes de plus de ~0,5 % de ton poids par semaine, réduis un peu les calories."
+        )
+        if pace == "rapide":
+            w.append("Rythme rapide = davantage de gras pris en même temps que le muscle. Le rythme tranquille donne une prise plus propre.")
+        if p.bodyfat_pct is not None:
+            if (p.sex.upper() == "M" and p.bodyfat_pct > 20) or (p.sex.upper() == "F" and p.bodyfat_pct > 30):
+                infos.append(
+                    "Ta masse grasse est déjà confortable : tu construiras du muscle plus proprement "
+                    "en passant d'abord par une perte de gras ou une restructuration."
+                )
+    return w, infos
 
 def confidence_score(p: Profile) -> int:
     score = 60
@@ -331,13 +346,15 @@ def compute_targets(p: Profile) -> Targets:
     tdee = bmr + neat + sport
     calories, pace, weekly_change = target_calories(p, tdee)
     P, C, F = split_macros(p, calories)
+    warnings, infos = guardrails(p, calories, sport, weekly_change, pace)
     return Targets(
         bmr=round(bmr), bmr_method=method, neat_kcal=round(neat), sport_kcal=round(sport),
         tdee=round(tdee), calories=round(calories), pace=pace,
         weekly_change_kg=round(weekly_change, 3),
         protein_g=P, carb_g=C, fat_g=F, fiber_g=fiber_g(calories),
         confidence=confidence_score(p),
-        warnings=guardrails(p, calories, sport, weekly_change),
+        warnings=warnings,
+        infos=infos,
     )
 
 

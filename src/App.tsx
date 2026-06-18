@@ -6,7 +6,7 @@ import { ResultsView } from "./components/ResultsView";
 
 const DEFAULT_PROFILE: ProfileIn = {
   sex: "M",
-  age: 26,
+  birthday: "1999-01-01",
   weight_kg: 75,
   height_cm: 177,
   objective: "prise_muscle",
